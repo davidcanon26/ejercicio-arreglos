@@ -69,4 +69,10 @@ public class Estudiante {
             return "SI APRUEBA";
         }
     }
+    public void incrementarNotaDesarrollo(double incremento) {
+        this.notaDesarrollo += incremento;
+        if (this.notaDesarrollo > 5.0) {
+            this.notaDesarrollo = 5.0; // Se ajusta al tope máximo permitido
+        }
+    }
 }
