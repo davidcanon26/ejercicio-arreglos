@@ -41,7 +41,8 @@ public class ControladorEstudiante {
         generarReporte();
         double Limite = vista.solicitarNotaLimite();
         generarReporteFiltrado(Limite);
-        
+        double incremento = vista.solicitarIncrementoNota();
+        aplicarIncremento(incremento);
     }
 
     private void generarReporte() {
@@ -79,5 +80,10 @@ public class ControladorEstudiante {
         }
 
         vista.mostrarMensaje(reporte);
+    }
+    private void aplicarIncremento(double incremento) {
+        for (int i = 0; i < arregloEstudiantes.length; i++) {
+            arregloEstudiantes[i].incrementarNotaDesarrollo(incremento);
+        }
     }
 }
