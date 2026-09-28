@@ -39,6 +39,9 @@ public class ControladorEstudiante {
         }
 
         generarReporte();
+        double Limite = vista.solicitarNotaLimite();
+        generarReporteFiltrado(Limite);
+        
     }
 
     private void generarReporte() {
@@ -52,6 +55,27 @@ public class ControladorEstudiante {
             reporte += "Nota Definitiva: " + String.format("%.2f", est.calcularDefinitiva()) + "\n";
             reporte += "Estado: " + est.obtenerEstadoAprobacion() + "\n";
             reporte += "----------------------------------------\n";
+        }
+
+        vista.mostrarMensaje(reporte);
+    }
+    private void generarReporteFiltrado(double Limite) {
+        String reporte = "--- ESTUDIANTES CON DEFINITIVA SUPERIOR A " + Limite + " ---\n\n";
+        boolean encontro = false;
+
+        for (int i = 0; i < arregloEstudiantes.length; i++) {
+            Estudiante est = arregloEstudiantes[i];
+            if (est.calcularDefinitiva() > Limite) {
+                reporte += "Código: " + est.getCodigo() + "\n";
+                reporte += "Nombre: " + est.getNombre() + "\n";
+                reporte += "Nota Definitiva: " + String.format("%.2f", est.calcularDefinitiva()) + "\n";
+                reporte += "----------------------------------------\n";
+                encontro = true;
+            }
+        }
+
+        if (!encontro) {
+            reporte += "Ningún estudiante supera la nota límite ingresada.\n";
         }
 
         vista.mostrarMensaje(reporte);
