@@ -43,6 +43,7 @@ public class ControladorEstudiante {
         generarReporteFiltrado(Limite);
         double incremento = vista.solicitarIncrementoNota();
         aplicarIncremento(incremento);
+        generarReporteIncremento();
     }
 
     private void generarReporte() {
@@ -85,5 +86,20 @@ public class ControladorEstudiante {
         for (int i = 0; i < arregloEstudiantes.length; i++) {
             arregloEstudiantes[i].incrementarNotaDesarrollo(incremento);
         }
+    }
+    private void generarReporteIncremento() {
+        String reporte = "--- REPORTE FINAL LUEGO DEL INCREMENTO EN DESARROLLO ---\n\n";
+
+        for (int i = 0; i < arregloEstudiantes.length; i++) {
+            Estudiante est = arregloEstudiantes[i];
+            
+            reporte += "Código: " + est.getCodigo() + "\n";
+            reporte += "Nombre: " + est.getNombre() + "\n";
+            reporte += "Nota Definitiva: " + String.format("%.2f", est.calcularDefinitiva()) + "\n";
+            reporte += "Estado: " + est.obtenerEstadoAprobacion() + "\n";
+            reporte += "----------------------------------------\n";
+        }
+
+        vista.mostrarMensaje(reporte);
     }
 }
